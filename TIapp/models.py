@@ -17,23 +17,18 @@ class Issue(models.Model):
     def __unicode__(self):
         return self.title
 
-class Comments(models.Model):
+class Comment(models.Model):
     content = models.TextField()
     comment_user = models.ForeignKey('Ti_user')
     created_time = models.DateTimeField()
 
-class Category(models.Model):
+class Cti(models.Model):
     name = models.CharField(max_length=64, unique=True)
     owner = models.ForeignKey('Ti_user')
+    parent_Cti = models.ForeignKey('Cti')
     
     def __unicode__(self):
         return self.name
-    
-class Type(models.Model):
-    pass
-
-class Item(models.Model):
-    pass
 
 class Ti_user(models.Model):
     user = models.OneToOneField(User)
@@ -45,9 +40,8 @@ class Ti_user(models.Model):
     
 class Department(models.Model):
     department_name = models.CharField(max_length=64)
-    category = models.ManyToManyField('Category')
-    type = models.ManyToManyField('Type')
-    item = models.ManyToManyField('Item')
+    cti = models.ForeignKey('Cti')
+    
     
     def __unicode__(self):
         return self.department_name
