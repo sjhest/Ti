@@ -21,11 +21,14 @@ class Comment(models.Model):
     content = models.TextField()
     comment_user = models.ForeignKey('Ti_user')
     created_time = models.DateTimeField()
-
+    
+    def __unicode__(self):
+        return self.content
+    
 class Cti(models.Model):
     name = models.CharField(max_length=64, unique=True)
     owner = models.ForeignKey('Ti_user')
-    parent_Cti = models.ForeignKey('Cti')
+    #parent_Cti = models.ForeignKey('Cti')
     
     def __unicode__(self):
         return self.name
