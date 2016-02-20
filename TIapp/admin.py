@@ -10,7 +10,7 @@ admin.site.register(models.Issue,IssueAdmin)
 
 class CommentAdmin(admin.ModelAdmin):
     display_list = ('content', 'created_time')
-admin.site.register(models.Comment)
+admin.site.register(models.Comment, CommentAdmin)
 admin.site.register(models.Ti_user)
 admin.site.register(models.Cti)
 admin.site.register(models.Department)
