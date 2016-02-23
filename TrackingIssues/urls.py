@@ -16,9 +16,12 @@ Including another URLconf
 """
 from django.conf.urls import url,include
 from django.contrib import admin
-
-import TIapp
+from django.contrib.auth import views as auth_views
+from TIapp import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'', include(TIapp.urls)),
+    url(r'^accounts/login/$', auth_views.login),
+    url(r'^accounts/logout/$', views.logout),
+    url('^', include('django.contrib.auth.urls')),
+    url(r'', include('TIapp.urls')),
 ]

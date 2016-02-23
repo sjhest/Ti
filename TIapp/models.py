@@ -11,8 +11,8 @@ class Issue(models.Model):
     requester = models.ForeignKey('Ti_user')
     assigned_group = models.ForeignKey('Department')
     Severity = models.IntegerField()
-    created_time = models.DateTimeField()
-    updated_time = models.DateTimeField()
+    created_time = models.DateTimeField(auto_now_add=True)
+    updated_time = models.DateTimeField(auto_now=True)
     
     def __unicode__(self):
         return self.title
@@ -20,7 +20,8 @@ class Issue(models.Model):
 class Comment(models.Model):
     content = models.TextField()
     comment_user = models.ForeignKey('Ti_user')
-    created_time = models.DateTimeField()
+    issue = models.ForeignKey('Issue')
+    created_time = models.DateTimeField(auto_now=True)
     
     def __unicode__(self):
         return self.content
@@ -48,3 +49,7 @@ class Department(models.Model):
     
     def __unicode__(self):
         return self.department_name
+
+class Settings(models.Model):
+    level = models.CharField(max_length=1, choices=(('G','Global'), ('D', 'Department'), ('U', 'User')))
+    
